@@ -1,0 +1,33 @@
+# ============================================================
+# Dockerfile.frontend — Build the Streamlit frontend container
+# ============================================================
+# This file tells Docker how to package the Streamlit UI
+# into a self-contained container.
+#
+# Build:  docker build -f Dockerfile.frontend -t house-frontend .
+# Run:    docker run -p 8501:8501 house-frontend
+# ============================================================
+
+# Start from an official Python image
+FROM python:3.10-slim
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy requirements and install libraries
+COPY requirements.txt .
+RUN pip install --no-cache-dir streamlit requests plotly pandas numpy
+
+# Copy only the files the frontend needs
+COPY frontend/ ./frontend/
+COPY models/   ./models/
+
+# Open port 8501 (Streamlit default)
+EXPOSE 8501
+
+# Don't open a browser automatically (we're inside a container)
+ENV STREAMLIT_SERVER_HEADLESS=true
+ENV STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
+
+# Command to run when the container starts
+CMD ["streamlit", "run", "frontend/app.py", "--server.port=8501", "--server.address=0.0.0.0"]

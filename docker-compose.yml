@@ -1,0 +1,41 @@
+# ============================================================
+# docker-compose.yml
+# ============================================================
+# Starts BOTH services (API + Frontend) together:
+#
+#   docker compose up --build
+#
+# After running:
+#   API      -> http://localhost:5000/health
+#   Frontend -> http://localhost:8501
+# ============================================================
+
+services:
+
+  # ── Service 1: Flask API ─────────────────────────────────
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: house_api
+    ports:
+      - "5000:5000"           # host port : container port
+    volumes:
+      - ./models/artifacts:/app/models/artifacts
+
+  # ── Service 2: Streamlit Frontend ────────────────────────
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: house_frontend
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./models/artifacts:/app/models/artifacts
+    environment:
+      # Inside Docker, services talk to each other by service name.
+      # "api" below refers to the api service above, not localhost.
+      - API_URL=http://api:5000
+    depends_on:
+      - api

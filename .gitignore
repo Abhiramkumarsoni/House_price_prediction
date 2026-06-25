@@ -1,0 +1,54 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+.venv/
+venv/
+env/
+.env
+
+# Data (large files — track with DVC or LFS if needed)
+data/raw/*.csv
+data/raw/*.zip
+data/processed/
+
+models/artifacts/*.pkl
+models/artifacts/*.json
+data/raw/*.csv
+data/raw/*.zip
+
+# Logs
+*.log
+training.log
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Coverage
+.coverage
+coverage.xml
+htmlcov/
+.pytest_cache/
+
+# Kaggle
+# *.json  ← Don't ignore all JSON (metrics etc.)
+
+# Docker
+.dockerignore
+
+# OS
+.DS_Store
+Thumbs.db

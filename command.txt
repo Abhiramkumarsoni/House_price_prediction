@@ -1,0 +1,46 @@
+# ── Train first (always needed before Docker) ──
+python train.py
+
+# ── Flask API ──────────────────────────────────
+# Step 1: Build the image
+docker build -f Dockerfile.api -t house-api .
+
+# Step 2: Run the container
+docker run -p 5000:5000 -v ./models:/app/models house-api
+
+# ── Streamlit Frontend ─────────────────────────
+# Step 1: Build the image
+docker build -f Dockerfile.frontend -t house-frontend .
+
+# Step 2: Run the container
+docker run -p 8501:8501 -v ./models:/app/models house-frontend
+
+
+
+
+ Step 1: Train the model first (creates models/artifacts/*.pkl)
+python train.py
+# Step 2: Build and start everything
+docker-compose up --build
+
+
+
+
+
+
+###############################################
+# Stop all containers
+docker compose down
+
+# Restart without rebuilding
+docker compose up
+
+# Rebuild and restart (after code changes)
+docker compose up --build
+
+# See running containers
+docker ps
+
+# See logs of a specific container
+docker logs house_api
+docker logs house_frontend

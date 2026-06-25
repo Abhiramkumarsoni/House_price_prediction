@@ -1,0 +1,29 @@
+# ============================================================
+# House Price Prediction - Required Libraries
+# ============================================================
+# Install all at once with:  pip install -r requirements.txt
+# ============================================================
+
+# --- Data & Math ---
+numpy==1.26.4          # Arrays and math operations
+pandas==2.2.2          # Read/write CSV, data tables
+
+# --- Machine Learning ---
+scikit-learn==1.5.0    # ML algorithms, preprocessing, metrics
+                       # (California Housing dataset is built into sklearn!)
+joblib==1.4.2          # Save & load trained models (.pkl files)
+
+# --- Web API (Flask) ---
+flask==3.0.3           # Build simple REST API
+flask-cors==4.0.1      # Allow frontend to call the API
+
+# --- Frontend (Streamlit) ---
+streamlit==1.36.0      # Build interactive web UI easily
+requests==2.32.3       # Make HTTP calls from Streamlit to Flask
+plotly==5.22.0         # Charts and graphs
+
+# --- Testing ---
+pytest==8.2.2          # Run unit tests
+
+# --- Utilities ---
+python-dotenv==1.0.1   # Load .env config files
